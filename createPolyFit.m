@@ -1,6 +1,11 @@
 function [handles] = createPolyFit(order, curve, interval, dSa)
 % Order must be defined in GUI, either 3 or 4, remember str2num
 % Remember that curve must bew defined by user via file
+%
+% order - order of fitted polynomial
+% curve - Pairs of Sa and MAF
+% interval - lowest and highest number of Sa for fitting
+% dSa - spacing of Sa vector
 
 order = str2num(order);
 
@@ -45,7 +50,7 @@ if order == 4
         newline 'R^2 = ', num2str(R_squared)];
     
 elseif order == 3
-    [p, ~] = polyfit(log(Sa_logspace),log(MAF_interpolated), 3);
+    [p, ~] = polyfit(log(Sa_logspace),log(MAF_logspace), 3);
     
     regularpoly_SSR = exp(p(4)+p(3)*log(Sa_logspace)+p(2)*log(Sa_logspace).^2+...
         p(1)*log(Sa_logspace).^3);
@@ -54,7 +59,7 @@ elseif order == 3
         p(1)*log(Sa_fitted).^3);
     
     SST = sum((MAF_logspace - mean(MAF_logspace)).^2);
-    SSR = sum((MAF_interpolated - regularpoly_SSR).^2);
+    SSR = sum((MAF_logspace - regularpoly_SSR).^2);
     R_squared = 1-SSR/SST;
     
     derivpoly = abs((p(3)+2*p(2)*log(Sa_fitted)+3*p(1)*log(Sa_fitted)...
