@@ -29,5 +29,7 @@ for i=1:ns
     stripes_edp{i} = csvread(filenames(i),1,1);
 end
 
-[handles] = ResponseEstimation(stripes,stripes_edp);
+[handles] = ResponseEstimation(stripes,stripes_edp,handles);
 
+%% Collapse Fragility, MAF, Probability in 50 years
+[handles] = CollapseFragility(stripes,n,handles);
