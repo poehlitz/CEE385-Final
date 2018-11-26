@@ -1,5 +1,7 @@
 function [handles] = CollapseFragility(stripes,n,handles)
 
+%Hello
+
 %Fit of Collapse Fragility Function based on Maximum Likelihood
 fun2 = @(v) maxLikelihood(handles.numberCollapse, n, stripes, v(1), v(2));
 v_guess = [.8, .4];
