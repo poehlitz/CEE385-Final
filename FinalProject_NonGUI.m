@@ -52,4 +52,4 @@ nd = (size(fragility,2)-2)/4; %number of damage states, make so can specify
 % Probability of Being in Each Damage State Given EDP
 % Expected Loss Given Each Damage State
 
-[handles] = ExpectedLoss(fragility);
+%[handles] = ExpectedLoss(fragility,nfr,nd);
