@@ -27,7 +27,7 @@ set(gca, ...
   'YMinorTick'  , 'on');
 
 %Calculate PDF of Collapse
-pdf_collapse = (1-ML_P).*handles.hazardDerivative(2,:);
+pdf_collapse = ML_P.*handles.hazardDerivative(2,:);
 
 figure
 plot(handles.hazardDerivative(1,:), pdf_collapse);
