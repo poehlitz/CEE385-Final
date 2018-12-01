@@ -30,17 +30,17 @@ set(gca, ...
 pdf_collapse = normcdf((log(handles.hazardDerivative(1,:))-log(ML_minimumParameters(1)))./ML_minimumParameters(2)).*handles.hazardDerivative(2,:);
 
 figure
-plot(handles.hazardDerivative(1,:), pdf_collapse);
 title('Collapse Deaggregation')
 xlabel('Sa (g)')
-ylabel('P[collapse|IM]*d(lambda)/d(IM)')
+ylabel('P[')
+xlim([0,2])
 set(gca, ...
   'Box'         , 'off'     , ...
   'TickDir'     , 'out'     , ...
   'TickLength'  , [.02 .02] , ...
   'XMinorTick'  , 'on'      , ...
   'YMinorTick'  , 'on');
-grid on
+
 
 %Integrate PDF of Collapse to get Mean Annual Frequency
 MAF_c = trapz(handles.hazardDerivative(1,:), pdf_collapse);% Is this corrent?
