@@ -27,7 +27,7 @@ set(gca, ...
   'YMinorTick'  , 'on');
 
 %Calculate PDF of Collapse
-pdf_collapse = normcdf((log(handles.hazardDerivative(1,:))-log(ML_minimumParameters(1)))./ML_minimumParameters(2)).*handles.hazardDerivative(2,:);
+pdf_collapse = (1-ML_P).*handles.hazardDerivative(2,:);
 
 figure
 plot(handles.hazardDerivative(1,:), pdf_collapse);
