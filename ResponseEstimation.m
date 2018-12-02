@@ -34,8 +34,8 @@ for i=1:size(stripes_edp{1},1)
     plot(stripes,meanEDP(:,i),stripes,meanEDP(:,i)+standarddevEDP(:,i),stripes,meanEDP(:,i)-standarddevEDP(:,i),'LineWidth',3,'Color','r')
     %plot(stripes,medianEDP(:,i),'LineWidth',3,'Color','r')
     title(['EDP ', num2str(i), ' v. IM'])
-    ylabel('Sa')
-    xlabel('EDP')
+    ylabel('EDP')
+    xlabel('Sa')
     set(gca, ...
       'Box'         , 'off'     , ...
       'TickDir'     , 'out'     , ...
