@@ -39,6 +39,10 @@ end
 %% Load Fragility and Loss Functions
 [handles] = loadComputeDamageFragilities(handles, 'SampleFragilityLossFunctionsS.csv');
 
+%% Compute Loss Given IM for structure
+
+
+
 % Probability of Being in Each Damage State Given EDP
 % Expected Loss Given Each Damage State
 %[handles] = ExpectedLoss(fragility,nfr,nd);
