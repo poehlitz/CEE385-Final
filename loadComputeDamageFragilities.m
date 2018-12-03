@@ -16,7 +16,9 @@ handles.Components = categories;
 
 % Okay not sure exactly how previous functions working but I decided to
 % hard code EDP in for now, we can change later
-handles.EDP.IDR = 0:.0001:.05; 
+% This wasn't established in earlier code, but maybe it needs to be an
+% input to the GUI?
+handles.EDP.IDR = 0:.0001:.05;
 handles.EDP.PFA = 0:.01:4.0;
 
 % Loop through all of the different types of damage fragilities

@@ -19,9 +19,8 @@ n = 30; %Number of Groundmotions
 
 %Load Stripes Values from .csv - offset data by one to only get numeric
 %data
-%It may be better to load a different way, maybe xlsread to give us a cell
-%output
-%I'm mainly worried about how we know which rows are which EDPs
+%Maybe we could structure this similar to how we structured the fragility
+%and loss functions
 filenames=["Stripe1_Sa0.10_1col_S.csv","Stripe2_Sa0.35_1col_S.csv",...
     "Stripe3_Sa0.70_1col_S.csv","Stripe4_Sa1.05_1col_S.csv"];
 stripes = [0.1,0.35,0.70,1.05];%Not sure how these are input into GUI
@@ -39,8 +38,12 @@ end
 %% Load Fragility and Loss Functions
 [handles] = loadComputeDamageFragilities(handles, 'SampleFragilityLossFunctionsS.csv');
 
-%% Compute Loss Given IM for structure
 
+%% Load Structure Data into Coding Structure
+filename = 'SampleBuildingDataS.csv';
+[handles] = LoadStructureData(handles,filename);
+
+%% Compute Loss Given IM for structure
 %Function gives expected loss for each damage state
 [handles] = ExpectedLossFunction(handles);
 
