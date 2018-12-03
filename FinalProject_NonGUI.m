@@ -41,8 +41,14 @@ end
 
 %% Compute Loss Given IM for structure
 
+%Function gives expected loss for each damage state
+[handles] = ExpectedLossFunction(handles);
 
 
-% Probability of Being in Each Damage State Given EDP
-% Expected Loss Given Each Damage State
-%[handles] = ExpectedLoss(fragility,nfr,nd);
+% expected value of the loss per floor/story as a function of IM
+% (i) conditioned on no collapse and nodemolition; (ii) conditioned on no 
+% collapse but demolition is necessary and (iii) if collapse occurs
+
+% total expected loss as a function of IM
+% expected annual loss
+% plot the deaggregation of the expected annual loss
