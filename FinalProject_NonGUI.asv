@@ -46,9 +46,9 @@ filename = 'SampleBuildingDataS.csv';
 %% Compute Loss Given IM for structure
 %Function gives expected loss for each damage state
 filename = 'SampleBuildingDataS.csv';
-handles.numStory = 6; % Need to find this somehow!
-handles = loadStructure(filename, handles);
 
+handles = loadStructure(filename, handles);
+    
 % expected value of the loss per floor/story as a function of IM
 % (i) conditioned on no collapse and nodemolition; (ii) conditioned on no 
 % collapse but demolition is necessary and (iii) if collapse occurs
