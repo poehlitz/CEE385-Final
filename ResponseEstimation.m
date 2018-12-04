@@ -1,40 +1,35 @@
-function [handles] = ResponseEstimation(stripes,stripes_edp,handles)
+function [handles] = ResponseEstimation(stripes,handles)
 
 numberCollapse = zeros (length(stripes),1);
-medianEDP = zeros (length(stripes),size(stripes_edp,2));
-variationEDP = zeros (length(stripes),size(stripes_edp,2));
+medianEDP = zeros (length(stripes),1);
+variationEDP = zeros (length(stripes),1);
 
-for i=1:length(stripes)
-    for j=1:size(stripes_edp{1},1)
-        a = stripes_edp{i}(j,:);
+for j=1:length(handles.EDPnames)
+    for i=1:length(stripes) %Loop Over Stripes
+     %Loop over EDP Types and Floors
+        a = handles.EDPtype.(handles.EDPnames{j}).GMData(i,:);
         indices = find(isnan(a)==1);
         numberCollapse (i) = length(indices);
         a(indices) = [];
-        medianEDP(i,j) = median(a);
-        variationEDP(i,j) = std(log(a));
+        medianEDP(i) = median(a);
+        variationEDP(i) = std(log(a));
     end
+    handles.EDPtype.(handles.EDPnames{j}).numberCollapse = numberCollapse;
+    handles.EDPtype.(handles.EDPnames{j}).medianEDP = medianEDP;
+    handles.EDPtype.(handles.EDPnames{j}).variationEDP = variationEDP;
+    meanEDP = medianEDP.*exp(0.5*variationEDP.^2);
+    handles.EDPtype.(handles.EDPnames{j}).meanEDP = meanEDP;
+    handles.EDPtype.(handles.EDPnames{j}).standarddevEDP = meanEDP.*sqrt(exp(variationEDP.^2)-1);
 end
 
-handles.numberCollapse = numberCollapse;
-handles.medianEDP = medianEDP;
-handles.variationEDP = variationEDP;
-
-meanEDP = medianEDP.*exp(0.5*variationEDP.^2);
-standarddevEDP = meanEDP.*sqrt(exp(variationEDP.^2)-1);
-
-b = zeros (length(stripes),size(stripes_edp{1},2));
-for i=1:size(stripes_edp{1},1)
+for i=1:length(handles.EDPnames)
     figure
-    b(1,:) = stripes_edp{1}(i,:);
-    b(2,:) = stripes_edp{2}(i,:);
-    b(3,:) = stripes_edp{3}(i,:);
-    b(4,:) = stripes_edp{4}(i,:);
-    plot(stripes,b, 'Color', [0.8 0.8 0.8])
+    plot(stripes,handles.EDPtype.(handles.EDPnames{i}).GMData, 'Color', [0.8 0.8 0.8])
     hold on
-    plot(stripes,meanEDP(:,i),stripes,meanEDP(:,i)+standarddevEDP(:,i),stripes,meanEDP(:,i)-standarddevEDP(:,i),'LineWidth',3,'Color','r')
+    plot(stripes,handles.EDPtype.(handles.EDPnames{i}).meanEDP,'LineWidth',3,'Color','r')
     %plot(stripes,medianEDP(:,i),'LineWidth',3,'Color','r')
-    title(['EDP ', num2str(i), ' v. IM'])
-    ylabel('EDP')
+    title([(handles.EDPnames{i}), ' v. IM'])
+    ylabel((handles.EDPnames{i}))
     xlabel('Sa')
     set(gca, ...
       'Box'         , 'off'     , ...

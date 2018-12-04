@@ -23,19 +23,14 @@ n = 30; %Number of Groundmotions
 %and loss functions
 filenames=["Stripe1_Sa0.10_1col_S.csv","Stripe2_Sa0.35_1col_S.csv",...
     "Stripe3_Sa0.70_1col_S.csv","Stripe4_Sa1.05_1col_S.csv"];
-stripes = [0.1,0.35,0.70,1.05];%Not sure how these are input into GUI
+handles.stripes = [0.1,0.35,0.70,1.05];%Not sure how these are input into GUI
 
-for i=1:ns
-    disp(filenames(i))
-    stripes_edp{i} = readtable(filenames(i));
-end
+[handles] = LoadStripeData(handles, filenames,ns);
 
-
-
-[handles] = ResponseEstimation(stripes,stripes_edp,handles);
+[handles] = ResponseEstimation(handles.stripes,handles);
 
 %% Collapse Fragility, MAF, Probability in 50 years
-[handles] = CollapseFragility(stripes,n,handles); %Maybe split out functions for MAF and Probability in 50 years
+[handles] = CollapseFragility(handles.stripes,n,handles); %Maybe split out functions for MAF and Probability in 50 years
 
 %% Load Fragility and Loss Functions
 [handles] = loadComputeDamageFragilities(handles, 'SampleFragilityLossFunctionsS.csv');
