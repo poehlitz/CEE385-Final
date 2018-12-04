@@ -9,7 +9,7 @@ for i = 1:length(handles.Components) %Loop over each component/loss function
     handles.(handles.Components{i}).ExpectedLoss_DS = ExpectedLoss_DS;
 end
 
-%Expected Loss Per EDP
+%Expected Loss each Componenet Per EDP
 for i = 1:length(handles.Components) %Loop over each component/loss function
     ExpectedLoss_EDP=zeros(handles.(handles.Components{i}).NumDS+1,length(handles.EDP.(handles.(handles.Components{i}).EDPtype)));
     for j = 1:length(handles.EDP.(handles.(handles.Components{i}).EDPtype)) %loop over each EDP

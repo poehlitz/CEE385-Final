@@ -1,9 +1,9 @@
-function [handles] = CollapseFragility(stripes,n,handles)
+function [handles] = CollapseFragility(n,handles)
 
 %Hello
 
 %Fit of Collapse Fragility Function based on Maximum Likelihood
-fun2 = @(v) maxLikelihood(handles.numberCollapse, n, stripes, v(1), v(2));
+fun2 = @(v) maxLikelihood(handles.numberCollapse, n, handles.stripes, v(1), v(2));
 v_guess = [.8, .4];
 ML_minimumParameters = fminsearch(fun2, v_guess);
 
@@ -11,7 +11,7 @@ ML_Sa = handles.hazardDerivative(1,:);
 ML_P = normcdf((log(ML_Sa)-log(ML_minimumParameters(1)))/ML_minimumParameters(2));
 
 figure
-plot(stripes,handles.numberCollapse/n,'o',ML_Sa,ML_P,'k')
+plot(handles.stripes,handles.numberCollapse/n,'o',ML_Sa,ML_P,'k')
 grid on
 title('Collapse Fragility Function')
 legend('Stripe Analysis Median Collapse', 'Max Likelihood Fragility Fit')
