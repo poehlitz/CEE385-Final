@@ -45,8 +45,12 @@ filename = 'SampleBuildingDataS.csv';
 [handles] = ExpectedLossFunction(handles);
 
 %% Probability of Demolition Given No Collapse
-demo_RIDR_median = 0.015;
-demo_RIDR_dispersion = 0.3;
+
+%Enter in GUI
+handles.demo.RIDR_median = 0.015;
+handles.demo.RIDR_dispersion = 0.3;
+
+%[handles] = ExpectedLoss(handles);
 
 
 
