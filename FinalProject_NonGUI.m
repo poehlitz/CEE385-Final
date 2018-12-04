@@ -27,10 +27,10 @@ handles.stripes = [0.1,0.35,0.70,1.05];%Not sure how these are input into GUI
 
 [handles] = LoadStripeData(handles, filenames,ns);
 
-[handles] = ResponseEstimation(handles.stripes,handles);
+[handles] = ResponseEstimation(handles);
 
 %% Collapse Fragility, MAF, Probability in 50 years
-[handles] = CollapseFragility(handles.stripes,n,handles); %Maybe split out functions for MAF and Probability in 50 years
+[handles] = CollapseFragility(n,handles); %Maybe split out functions for MAF and Probability in 50 years
 
 %% Load Fragility and Loss Functions
 [handles] = loadComputeDamageFragilities(handles, 'SampleFragilityLossFunctionsS.csv');
