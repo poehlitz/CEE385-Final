@@ -9,6 +9,7 @@ ML_minimumParameters = fminsearch(fun2, v_guess);
 
 ML_Sa = handles.hazardDerivative(1,:);
 ML_P = normcdf((log(ML_Sa)-log(ML_minimumParameters(1)))/ML_minimumParameters(2));
+handles.P_collapse = ML_P;
 
 figure
 plot(handles.stripes,handles.numberCollapse/n,'o',ML_Sa,ML_P,'k')
