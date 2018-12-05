@@ -59,10 +59,11 @@ handles = loadStructure(filename, handles);
 %% Probability of Demolition Given No Collapse
 
 %Enter in GUI
-handles.demo.RIDR_median = 0.015;
-handles.demo.RIDR_dispersion = 0.3;
+handles.demo.RIDR_median = 0.015; % User input here
+handles.demo.RIDR_dispersion = 0.3; % User input here
 
-%[handles] = ExpectedLoss(handles);
+[handles] = ExpectedLoss(handles);
+
 
 
 % expected value of the loss per floor/story as a function of IM
