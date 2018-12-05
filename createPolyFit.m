@@ -16,8 +16,8 @@ LoadedMAF = curve(:,2);
 npoints = length(LoadedSa);
 
 % Arbitrary Fitting Bounds
-Sa_lowerbound = .01; 
-Sa_upperbound = 3;
+Sa_lowerbound = .1; 
+Sa_upperbound = 2.5;
 
 % Use loaded and MAF to interpolate
 Sa_logspace = logspace(log10(Sa_lowerbound), log10(Sa_upperbound), 1000);

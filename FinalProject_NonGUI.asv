@@ -4,7 +4,7 @@ load("HazardCurve.txt")
 
 order = '4';
 curve = HazardCurve;
-interval = [0.03,3];
+interval = [0.01,3];
 dSa = 0.01;
 [handles] = createPolyFit(order, curve, interval, dSa);
 
@@ -65,9 +65,8 @@ handles.demo.RIDR_dispersion = 0.3; % User input here
 
 %% Create the Expected Loss given EDP over all damage states
 for j = 1:handles.numComponents
-%     EL_EDP_1comp = sum(handles.(handles.Components{j}).P_Damage.* ...
-%         handles.(handles.Components{j}).ExpectedLoss_EDP);
-    EL_EDP_1comp = sum(handles.(handles.Components{j}).ExpectedLoss_EDP);
+    EL_EDP_1comp = sum(handles.(handles.Components{j}).P_Damage.* ...
+        handles.(handles.Components{j}).ExpectedLoss_EDP);
     handles.(handles.Components{j}).EL_EDP_Component = EL_EDP_1comp;
     for i = 1:handles.numStory % Not sure here about story numbering
         handles.(handles.Components{j}).EL_EDP_Story(i, :) = EL_EDP_1comp * handles.(handles.storys{i}).NumComp(j);
