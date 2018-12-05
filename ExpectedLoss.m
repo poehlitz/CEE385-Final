@@ -1,8 +1,6 @@
 function [handles] = ExpectedLoss(handles)
 
 %Probability of Demolition At Each EDP
-handles.EDP.RIDR = 0:.01:4.0;
-
 prob_demo_edp = zeros(length(handles.EDP.RIDR),1);
 for i=1:length(handles.EDP.RIDR) %Loop over each EDP
     prob_demo_edp = normcdf((log(handles.EDP.RIDR(i))...
