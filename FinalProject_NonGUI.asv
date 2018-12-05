@@ -68,19 +68,17 @@ for j = 1:handles.numComponents
     EL_EDP_1comp = sum(handles.(handles.Components{j}).P_Damage.* ...
         handles.(handles.Components{j}).ExpectedLoss_EDP);
     handles.(handles.Components{j}).EL_EDP_Component = EL_EDP_1comp;
-    for i = 1:handles.numStory % Not sure here about story numbering
-        handles.(handles.Components{j}).EL_EDP_Story(i, :) = EL_EDP_1comp * handles.(handles.storys{i}).NumComp(j);
+    for i = 1:handles.numStory+1
+        handles.(handles.Components{j}).EL_EDP_Story = EL_EDP_1comp * handles.(handles.storys{i}).
     end
 end
 
-% TBD
-%% Find expected loss given IM
-Sa = handles.hazardDerivative(1,:);
-deriv = handles.hazardDerivative(2,:);
-
-for i = 1:handles.numStory
+%% Find expected loss given IM 
+for i = 1:handles.numFloor
     for j = 1:handles.numComponents
-        for k = 1:1 % TBD
+        for k = 1:1%length(handles.
+        Sa = handles.hazardDerivative(1,:);
+        deriv = handles.hazardDerivative(2,:);
         EDP = handles.(Components{i}).EDP;
         index = concat(handles.(Components{i}).EDPtype, num2str(i));
         PDF = handles.EDPtype.(index).pdf_edp_im(:, k);
@@ -89,7 +87,6 @@ for i = 1:handles.numStory
         end
     end
 end
-
 
         
         

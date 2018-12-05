@@ -14,11 +14,11 @@ handles.numComponents = length(handles.Components);
 ALPHABET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
 disp_start_index = strcat('B', num2str(2));
-disp_end_index = strcat(ALPHABET(handles.numComponents+1), num2str(1+handles.numStory));
+disp_end_index = strcat(ALPHABET(handles.numComponents+1), num2str(2+handles.numStory));
 disp_index = strcat(disp_start_index, ':', disp_end_index);
 
-a_start_index = strcat('B', num2str(handles.numStory+4));
-a_end_index = strcat(ALPHABET(handles.numComponents+1), num2str(3+2*handles.numStory));
+a_start_index = strcat('B', num2str(handles.numStory+5));
+a_end_index = strcat(ALPHABET(handles.numComponents+1), num2str(6+2*handles.numStory));
 a_index = strcat(a_start_index, ':', a_end_index);
 
 handles.buildingDataIDR = xlsread(filename, disp_index);
@@ -28,13 +28,10 @@ handles.replacementCostPart = xlsread(filename, strcat('F', num2str(9 + 2*handle
 handles.demolishionCost = xlsread(filename, strcat('F', num2str(11 + 2*handles.numStory), ':F', num2str(11 + 2*handles.numStory)));
 handles.collapseCost = xlsread(filename, strcat('F', num2str(13 + 2*handles.numStory), ':F', num2str(13 + 2*handles.numStory)));
 
-for i = 1:handles.numStory
-    if i < handles.numStory-1
-        handles.(handles.storys{i}).Money = (handles.buildingDataIDR(i, :) ...
-                                        + handles.buildingDataAcc(i, :))';
-    else
-        handles.(handles.storys{i}).Money = (handles.buildingDataAcc(i, :))';
-    end
-        handles.(handles.storys{i}).NumComp = handles.(handles.storys{i}).Money/handles.replacementCostPart;
+for i = 1:handles.numStory+1
+    
+    handles.(handles.storys{i}).Money = (handles.buildingDataIDR(i, :) ...
+                                    + handles.buildingDataAcc(i, :))';
+    handles.(handles.storys{i}).NumComp = handles.(handles.storys{i}).Money/handles.replacementCostPart;
 end
 end
