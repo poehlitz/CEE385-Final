@@ -38,10 +38,14 @@ handles = ResponseEstimation(handles);
 %% Collapse Fragility, MAF, Probability in 50 years
 handles = CollapseFragility(n,handles); %Maybe split out functions for MAF and Probability in 50 years
 
+%% Probability of Demolition Given No Collapse
+handles = ExpectedLoss(handles);
+
 %% Load Fragility and Loss Functions
 handles = loadComputeDamageFragilities(handles, 'SampleFragilityLossFunctionsS.csv');
 
 %% Load Structure Data
+
 % Name of the file to upload
 filename = 'SampleBuildingDataS.csv';
 
@@ -55,9 +59,6 @@ handles = expectedLoss_EDP(handles);
 
 % Return expected loss given IM conditioned on no collapse and no repair
 handles = expectedLoss_IM(handles);
-
-% Probability of Demolition Given No Collapse
-handles = ExpectedLoss(handles);
 
 % Find probabilities of all 3 ingredients (repair, demo, collapse) and plot
 % all loss functions given IM

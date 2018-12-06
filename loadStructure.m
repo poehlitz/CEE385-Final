@@ -1,6 +1,7 @@
 function [handles] = loadStructure(filename, handles)
 % Create the storys vector
-num = handles.numStory+1:-1:1;
+handles.numStory = 7; %Story input user
+num = handles.numStory:-1:1;
 storys = cell(length(num), 1);
 
 for i = 1:length(num)
@@ -9,7 +10,7 @@ end
 
 handles.storys = storys;
 
-handles.numStory = 7; %Story input user
+
 handles.numComponents = length(handles.Components);
 ALPHABET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
