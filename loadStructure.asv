@@ -31,8 +31,8 @@ a_end_index = strcat(ALPHABET(handles.numComponents+1), num2str(3+2*handles.numS
 a_index = strcat(a_start_index, ':', a_end_index);
 
 % Pull out specific matrices from excel charts
-buildingDataIDR = xlsread(filename, disp_index);
-buildingDataAcc = xlsread(filename, a_index);
+habuildingDataIDR = xlsread(filename, disp_index);
+handles.buildingDataAcc = xlsread(filename, a_index);
 
 % Pull out specific replacement cost of a Part, demolishionCost, and
 % collapse cost
@@ -43,10 +43,10 @@ handles.collapseCost = xlsread(filename, strcat('F', num2str(13 + 2*handles.numS
 % Load in structure data to corresponding handles array sections
 for i = 1:handles.numStory
     if i > 1
-        handles.(handles.storys{i}).Money = (buildingDataIDR(i-1, :) ...
-                                        + buildingDataAcc(i, :))';
+        handles.(handles.storys{i}).Money = (handles.buildingDataIDR(i-1, :) ...
+                                        + handles.buildingDataAcc(i, :))';
     else
-        handles.(handles.storys{i}).Money = (buildingDataAcc(i, :))';
+        handles.(handles.storys{i}).Money = (handles.buildingDataAcc(i, :))';
     end
         handles.(handles.storys{i}).NumComp = handles.(handles.storys{i}).Money/handles.replacementCostPart;
 end

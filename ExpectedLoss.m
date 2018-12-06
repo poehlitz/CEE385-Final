@@ -13,8 +13,10 @@ end
 %Probability of Demolition at Each IM
 %Multiple the Probability at each EDP by probability of observing that EDP
 %at a certain IM
+Sa = handles.hazardDerivative(1,:);
+prob_demo_im = zeros(handles.numStory - 1, length(Sa));
 
-for i=1:length(handles.hazardDerivative(1,:)) %Loop over each IM
+for i=1:length(Sa) %Loop over each IM
     %Loop over every floor, this isn't finished yet huh
     for j = 1:handles.numStory-1
         story_index = strcat('RIDR', num2str(handles.numStory - j));

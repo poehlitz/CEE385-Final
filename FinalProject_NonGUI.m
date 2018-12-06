@@ -11,13 +11,12 @@ dSa = 0.01;
 %% Initialize Variables for Integration
 % Should we do anything about fact that if the range includes zero we get a
 % Nan?
-handles.EDP.IDR = 0.0001:.0001:.1;
+handles.EDP.IDR = 0.0001:.0001:.15;
 handles.EDP.PFA = 0.01:.01:4.0;
-handles.EDP.RIDR = 0.0001:.0001:.08;
+handles.EDP.RIDR = 0.0001:.0001:.1;
 
 %% Input and Plot Stripe Analysis Results
 %GUI Inputs
-nf = 6; %Number of Floors
 ns = 4; %Number of Stripes
 nedp = 3; %Number of EDPs
 n = 30; %Number of Groundmotions
@@ -40,9 +39,9 @@ handles = CollapseFragility(n,handles); %Maybe split out functions for MAF and P
 handles = loadComputeDamageFragilities(handles, 'SampleFragilityLossFunctionsS.csv');
 
 %% Load Structure Data
+
 % Name of the file to upload
 filename = 'SampleBuildingDataS.csv';
-
 % Load in the structure data in correct format
 handles = loadStructure(filename, handles);
 
