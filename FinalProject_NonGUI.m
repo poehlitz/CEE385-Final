@@ -58,13 +58,10 @@ handles = loadStructure(filename, handles);
 %Enter in GUI
 handles.demo.RIDR_median = 0.015; % User input here
 handles.demo.RIDR_dispersion = 0.3; % User input here
-
 [handles] = ExpectedLoss(handles);
 
 %% Create the Expected Loss given EDP over all damage states
 for j = 1:handles.numComponents
-%     EL_EDP_1comp = sum(handles.(handles.Components{j}).P_Damage.* ...
-%         handles.(handles.Components{j}).ExpectedLoss_EDP);
     EL_EDP_1comp = sum(handles.(handles.Components{j}).ExpectedLoss_EDP);
     handles.(handles.Components{j}).EL_EDP_Component = EL_EDP_1comp;
     for i = 1:handles.numStory % Not sure here about story numbering
@@ -85,13 +82,35 @@ for j = 1:handles.numComponents
                 EDP = handles.(handles.Components{j}).EDP;
                 PDF = handles.EDPtype.(index).pdf_edp_im(:, k)';
                 EL_EDP = handles.(handles.Components{j}).EL_EDP_Story(i, :);
-                handles.(handles.storys{i}).Loss_IM(j, k) = trapz(EDP, PDF.*EL_EDP);
+                handles.(handles.storys{i}).Loss_IM_comp(j, k) = trapz(EDP, PDF.*EL_EDP);
             else
-                handles.(handles.storys{i}).Loss_IM(j, k) = 0;
+                handles.(handles.storys{i}).Loss_IM_comp(j, k) = 0;
             end
         end
     end
+    handles.(handles.storys{i}).Loss_IM = sum(handles.(handles.storys{i}).Loss_IM_comp);
 end
+
+% figure
+% plot(handles.hazardCurve(1,:), handles.Story1.Loss_IM)
+% title('Loss Test')
+
+% Have P_collapse
+P_collapse = handles.P_collapse;
+
+P_NC = 1 - P_collapse;
+P_NC_demo = P_NC * handles.demo.p_im;
+P_NC_repair = P_NC*(1-handles.demo.p_im);
+
+check = P_collapse + P_NC_demo + P_NC_repair;
+
+
+% Need P_demo
+
+% Derive P_NC
+% P_NC = 1-P_demo?
+
+
 
 
 
