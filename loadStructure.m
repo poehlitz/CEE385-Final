@@ -29,8 +29,8 @@ handles.demolishionCost = xlsread(filename, strcat('F', num2str(11 + 2*handles.n
 handles.collapseCost = xlsread(filename, strcat('F', num2str(13 + 2*handles.numStory), ':F', num2str(13 + 2*handles.numStory)));
 
 for i = 1:handles.numStory
-    if i < handles.numStory-1
-        handles.(handles.storys{i}).Money = (handles.buildingDataIDR(i, :) ...
+    if i > 1
+        handles.(handles.storys{i}).Money = (handles.buildingDataIDR(i-1, :) ...
                                         + handles.buildingDataAcc(i, :))';
     else
         handles.(handles.storys{i}).Money = (handles.buildingDataAcc(i, :))';

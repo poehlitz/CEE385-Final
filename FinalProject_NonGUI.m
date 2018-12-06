@@ -64,8 +64,6 @@ handles.demo.RIDR_dispersion = 0.3; % User input here
 
 %% Create the Expected Loss given EDP over all damage states
 for j = 1:handles.numComponents
-%     EL_EDP_1comp = sum(handles.(handles.Components{j}).P_Damage.* ...
-%         handles.(handles.Components{j}).ExpectedLoss_EDP);
     EL_EDP_1comp = sum(handles.(handles.Components{j}).ExpectedLoss_EDP);
     handles.(handles.Components{j}).EL_EDP_Component = EL_EDP_1comp;
     for i = 1:handles.numStory % Not sure here about story numbering
@@ -99,17 +97,14 @@ end
 % plot(handles.hazardCurve(1,:), handles.Story1.Loss_IM)
 % title('Loss Test')
 
-handles.totalLoss_NCIM = zeros(1, length(handles.hazardDerivative(1,:)));
-for j = 1:numStory
-    handles.totalLoss_NCIM = handles.totalLoss_NCIM + handles.(handles.story{i}).Loss_IM;
-end
-
 % Have P_collapse
 P_collapse = handles.P_collapse;
 
-P_NC_demo = 1 - P_collapse;
-P_demo = P_NC_demo * fragility.Demo;
-P_NC = P_NC_demo - P_demo;
+P_NC = 1 - P_collapse;
+P_NC_demo = P_NC * handles.demo.p_im;
+P_NC_repair = P_NC*(1-handles.demo.p_im);
+
+check = P_collapse + P_NC_demo + P_NC_repair;
 
 
 % Need P_demo
