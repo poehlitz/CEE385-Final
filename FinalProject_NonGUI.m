@@ -16,7 +16,6 @@ handles.EDP.PFA = 0.01:.01:4.0;
 handles.EDP.RIDR = 0.0001:.0001:.08;
 
 %% Input and Plot Stripe Analysis Results
-
 %GUI Inputs
 nf = 6; %Number of Floors
 ns = 4; %Number of Stripes
@@ -29,10 +28,9 @@ n = 30; %Number of Groundmotions
 %and loss functions
 filenames=["Stripe1_Sa0.10_1col_S.csv","Stripe2_Sa0.35_1col_S.csv",...
     "Stripe3_Sa0.70_1col_S.csv","Stripe4_Sa1.05_1col_S.csv"];
+
 handles.stripes = [0.1,0.35,0.70,1.05];%Not sure how these are input into GUI
-
 handles = LoadStripeData(handles, filenames,ns);
-
 handles = ResponseEstimation(handles);
 
 %% Collapse Fragility, MAF, Probability in 50 years
