@@ -58,20 +58,20 @@ for i=1:length(handles.EDPnames)
         %Calculate Probability of each EDP at each IM
         %Rows - EDP
         %Columns - IM
-    if contains(handles.EDPnames{i},'IDR')    
-        for j=1:length(median_everyIM)
-            handles.EDPtype.(handles.EDPnames{i}).pdf_edp_im(:,j) = (1./(handles.EDP.IDR.*sig_everyIM(j)*sqrt(2*pi))).*exp(-((log(handles.EDP.IDR)-log(median_everyIM(j))).^2)./(2*(sig_everyIM(j).^2)));
-        end
-        figure
-        plot(handles.EDP.IDR,handles.EDPtype.(handles.EDPnames{i}).pdf_edp_im(:,50))
-        title(['Probabilty Distribution of ',(handles.EDPnames{i}),' Given Sa = ',num2str(handles.hazardDerivative(1,50)),'g'])
-        xlabel(handles.EDPnames{i})
-    elseif contains(handles.EDPnames{i},'RIDR')
+    if contains(handles.EDPnames{i},'RIDR')    
         for j=1:length(median_everyIM)
             handles.EDPtype.(handles.EDPnames{i}).pdf_edp_im(:,j) = (1./(handles.EDP.RIDR.*sig_everyIM(j)*sqrt(2*pi))).*exp(-((log(handles.EDP.RIDR)-log(median_everyIM(j))).^2)./(2*(sig_everyIM(j).^2)));
         end
         figure
         plot(handles.EDP.RIDR,handles.EDPtype.(handles.EDPnames{i}).pdf_edp_im(:,50))
+        title(['Probabilty Distribution of ',(handles.EDPnames{i}),' Given Sa = ',num2str(handles.hazardDerivative(1,50)),'g'])
+        xlabel(handles.EDPnames{i})
+    elseif contains(handles.EDPnames{i},'IDR')
+        for j=1:length(median_everyIM)
+            handles.EDPtype.(handles.EDPnames{i}).pdf_edp_im(:,j) = (1./(handles.EDP.IDR.*sig_everyIM(j)*sqrt(2*pi))).*exp(-((log(handles.EDP.IDR)-log(median_everyIM(j))).^2)./(2*(sig_everyIM(j).^2)));
+        end
+        figure
+        plot(handles.EDP.IDR,handles.EDPtype.(handles.EDPnames{i}).pdf_edp_im(:,50))
         title(['Probabilty Distribution of ',(handles.EDPnames{i}),' Given Sa = ',num2str(handles.hazardDerivative(1,50)),'g'])
         xlabel(handles.EDPnames{i})
     elseif contains(handles.EDPnames{i},'PFA')

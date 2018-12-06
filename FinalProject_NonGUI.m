@@ -99,8 +99,8 @@ end
 P_collapse = handles.P_collapse;
 
 P_NC = 1 - P_collapse;
-P_NC_demo = P_NC * handles.demo.p_im;
-P_NC_repair = P_NC*(1-handles.demo.p_im);
+P_NC_demo = P_NC .* handles.demo.p_im;
+P_NC_repair = P_NC.*(1-handles.demo.p_im);
 
 check = P_collapse + P_NC_demo + P_NC_repair;
 
