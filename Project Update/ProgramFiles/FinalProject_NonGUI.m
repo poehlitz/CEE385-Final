@@ -12,7 +12,7 @@ dSa = 0.01;
 % Should we do anything about fact that if the range includes zero we get a
 % Nan?
 handles.EDP.IDR = 0.0001:.0001:.15;
-handles.EDP.PFA = 0.001:.005:4.0;
+handles.EDP.PFA = 0.01:.01:4.0;
 handles.EDP.RIDR = 0.0001:.0001:.1;
 
 %% Input and Plot Stripe Analysis Results
