@@ -25,7 +25,7 @@ for j=1:length(handles.EDPnames)%Loop over types of EDPs
         indices = find(isnan(a)==1);
         numberCollapse (i) = length(indices);
         a(indices) = [];
-        medianEDP(i) = median(a);
+        medianEDP(i) = geomean(a);
         variationEDP(i) = std(log(a));
 %         end
     end
