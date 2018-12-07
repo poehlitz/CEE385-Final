@@ -1,18 +1,33 @@
 function [handles] = ResponseEstimation(handles)
 
+%Initialize Variables
 numberCollapse = zeros (length(handles.stripes),1);
 medianEDP = zeros (length(handles.stripes),1);
 variationEDP = zeros (length(handles.stripes),1);
 
-for j=1:length(handles.EDPnames)
+% Median and Standard Deviation of EDPs
+for j=1:length(handles.EDPnames)%Loop over types of EDPs
     for i=1:length(handles.stripes) %Loop Over Stripes
-     %Loop over EDP Types and Floors
+%         if contains((handles.EDPnames{j}),'RIDR')
+%         RIDR = handles.EDPnames(contains(handles.EDPnames,'RIDR'));
+%         %We have data organized by floor, but I need to compare across
+%         %floors to max RIDR, maybe we need to add new field when load in
+%         %data, never need individual RIDR values...
+%         a = max(handles.(RIDR).GMData);
+%         indices = find(isnan(a)==1);
+%         numberCollapse (i) = length(indices);
+%         a(indices) = [];
+%         medianEDP(i) = median(a);
+%         variationEDP(i) = std(log(a));
+%         else
+        %Loop over EDP Types and Floors
         a = handles.EDPtype.(handles.EDPnames{j}).GMData(i,:);
         indices = find(isnan(a)==1);
         numberCollapse (i) = length(indices);
         a(indices) = [];
         medianEDP(i) = median(a);
         variationEDP(i) = std(log(a));
+%         end
     end
     handles.numberCollapse = numberCollapse;
     handles.EDPtype.(handles.EDPnames{j}).medianEDP = medianEDP;
