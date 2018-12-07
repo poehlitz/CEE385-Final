@@ -1,7 +1,6 @@
 close all; clear all;
 %% Load Hazard Curve and Fit a Polynomial in Log-Log Space
 load("HazardCurve.txt")
-
 order = '4';
 curve = HazardCurve;
 interval = [0.01,3];
@@ -39,12 +38,10 @@ handles = CollapseFragility(n,handles); %Maybe split out functions for MAF and P
 handles = loadComputeDamageFragilities(handles, 'SampleFragilityLossFunctionsS.csv');
 
 %% Load Structure Data
-
 % Name of the file to upload
 filename = 'SampleBuildingDataS.csv';
 % Load in the structure data in correct format
 handles = loadStructure(filename, handles);
-
 
 %% Compute Loss Given IM for structure
 % Return expected loss given EDP conditioned on no collapse and no repair

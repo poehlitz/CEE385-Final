@@ -16,7 +16,7 @@ LoadedMAF = curve(:,2);
 npoints = length(LoadedSa);
 
 % Arbitrary Fitting Bounds
-Sa_lowerbound = .1; 
+Sa_lowerbound = .01; 
 Sa_upperbound = 2.5;
 
 % Use loaded and MAF to interpolate
@@ -76,7 +76,7 @@ handles.hazardDerivative = [Sa_fitted; derivpoly];
 handles.hazardCurve =  [Sa_fitted; regularpoly];
 
 figure
-loglog(LoadedSa, LoadedMAF, Sa_fitted, regularpoly)
+loglog(LoadedSa, LoadedMAF, '-o', Sa_fitted, regularpoly)
 title('Seismic Hazard Curve')
 xlabel('Sa')
 ylabel('Mean Annual Frequency')
