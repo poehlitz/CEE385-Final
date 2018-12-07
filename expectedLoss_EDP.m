@@ -1,4 +1,4 @@
-function [handles] = ExpectedLossFunction(handles)
+function [handles] = expectedLoss_EDP(handles)
 
 %Expected Loss Per Damage State
 for i = 1:length(handles.Components) %Loop over each component/loss function
