@@ -4,7 +4,7 @@ handles = app.handles;
 
 for i=1:ns
     disp(filenames(i))
-    stripes_edp{i} = readtable(filenames(i));
+    stripes_edp{i} = readtable(filenames{i});
 end
 
 %Load Each EDP into Structure
@@ -20,5 +20,6 @@ for i=1:length(EDP)
     end
     handles.EDPtype.(EDP{i}).GMData = a;
     
-app.handles = handles;
 end
+
+app.handles = handles;

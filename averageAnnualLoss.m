@@ -1,4 +1,5 @@
 function app = averageAnnualLoss(app)
+
 handles = app.handles;
 
 % Combine all individual losses (already weighted based on P_collapse,

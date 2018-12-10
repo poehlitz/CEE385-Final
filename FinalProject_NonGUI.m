@@ -1,11 +1,11 @@
 close all; clear all;
 %% Load Hazard Curve and Fit a Polynomial in Log-Log Space
 load("HazardCurve.txt")
-order = '4';
-curve = HazardCurve;
-interval = [0.01,3];
-dSa = 0.01;
-[handles] = createPolyFit(order, curve, interval, dSa);
+handles.order = '4';
+handles.curve = HazardCurve;
+handles.interval = [0.01,3];
+hadnles.dSa = 0.01;
+[handles] = createPolyFit(handles);
 
 %% Initialize Variables for Integration
 % Should we do anything about fact that if the range includes zero we get a

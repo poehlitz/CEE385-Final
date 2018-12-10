@@ -1,4 +1,7 @@
-function [handles] = loadStructure(filename, handles)
+function [app] = loadStructure(filename, app)
+
+handles = app.handles;
+
 % Create the storys vector
 handles.numStory = 7; %Story input user
 num = handles.numStory:-1:1;
@@ -50,4 +53,8 @@ for i = 1:handles.numStory
     end
         handles.(handles.storys{i}).NumComp = handles.(handles.storys{i}).Money/handles.replacementCostPart;
 end
+
+app.handles = handles;
+
 end
+

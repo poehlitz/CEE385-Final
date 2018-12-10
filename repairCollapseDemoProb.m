@@ -19,24 +19,26 @@ handles.ncLoss_IM = handles.P_NC_repair .* handles.Loss_IM;
 handles.L_IM = handles.ncLoss_IM + handles.collapseLoss_IM + handles.demoLoss_IM;
 Sa = handles.hazardCurve(1,:);
 
-% Plot the Losses given IM
-figure
-hold on
-plot([0,Sa], [0, handles.L_IM], 'k', 'LineWidth', 1.5)
-plot(Sa, handles.ncLoss_IM, '--r')
-plot(Sa, handles.collapseLoss_IM, '--g')
-plot(Sa, handles.demoLoss_IM, '--b')
-xlabel('Sa (g)')
-ylabel('E[L|IM] ($)')
-title('Expected Loss Given IM')
-legend('Total Loss', 'No Collapse, Repair', 'Collapse', 'Demo')
-set(gca, ...
-  'Box'         , 'off'     , ...
-  'TickDir'     , 'out'     , ...
-  'TickLength'  , [.02 .02] , ...
-  'XMinorTick'  , 'on'      , ...
-  'YMinorTick'  , 'on');
-grid on
-hold off
+% % Plot the Losses given IM
+% figure
+% hold on
+% plot([0,Sa], [0, handles.L_IM], 'k', 'LineWidth', 1.5)
+% plot(Sa, handles.ncLoss_IM, '--r')
+% plot(Sa, handles.collapseLoss_IM, '--g')
+% plot(Sa, handles.demoLoss_IM, '--b')
+% xlabel('Sa (g)')
+% ylabel('E[L|IM] ($)')
+% title('Expected Loss Given IM')
+% legend('Total Loss', 'No Collapse, Repair', 'Collapse', 'Demo')
+% set(gca, ...
+%   'Box'         , 'off'     , ...
+%   'TickDir'     , 'out'     , ...
+%   'TickLength'  , [.02 .02] , ...
+%   'XMinorTick'  , 'on'      , ...
+%   'YMinorTick'  , 'on');
+% grid on
+% hold off
+
 app.handles = handles;
-end
+
+ end

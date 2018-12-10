@@ -1,5 +1,7 @@
 function [app] = loadComputeDamageFragilities(app, filename)
+
 handles = app.handles;
+
 %Load in Fragility Function Information
 %Note this only works for fragility and loss function that all have the
 %same number of damage states, maybe we could improve?
@@ -69,53 +71,54 @@ for i = 1:nfr
 end
 
 % Examples plots of Damage Fragilities
-for k = 1:length(handles.Components)
-comp = handles.(handles.Components{k});
-legendary = strings(1, comp.NumDS);
-figure
-hold on
-    for i=1:comp.NumDS
-        plot(comp.EDP, comp.DM_Fragility(i, :), 'LineWidth', 2)
-        legendary(i) = strcat('DS', num2str(i));
-    end
-    title(strcat(num2str(handles.Components{k}), ' Fragilities'))
-    xlabel(strcat('EDP (', comp.EDPtype, ')'))
-    ylabel('P[Ds > ds | EDP]')
-    legend(legendary)
-    set(gca, ...
-  'Box'         , 'off'     , ...
-  'TickDir'     , 'out'     , ...
-  'TickLength'  , [.02 .02] , ...
-  'XMinorTick'  , 'on'      , ...
-  'YMinorTick'  , 'on');
-    grid on
-end
+% for k = 1:length(handles.Components)
+% comp = handles.(handles.Components{k});
+% legendary = strings(1, comp.NumDS);
+% figure
+% hold on
+%     for i=1:comp.NumDS
+%         plot(comp.EDP, comp.DM_Fragility(i, :), 'LineWidth', 2)
+%         legendary(i) = strcat('DS', num2str(i));
+%     end
+%     title(strcat(num2str(handles.Components{k}), ' Fragilities'))
+%     xlabel(strcat('EDP (', comp.EDPtype, ')'))
+%     ylabel('P[Ds > ds | EDP]')
+%     legend(legendary)
+%     set(gca, ...
+%   'Box'         , 'off'     , ...
+%   'TickDir'     , 'out'     , ...
+%   'TickLength'  , [.02 .02] , ...
+%   'XMinorTick'  , 'on'      , ...
+%   'YMinorTick'  , 'on');
+%     grid on
+% end
 
-% Display P[DS = ds | EDP]
-for k = 1:length(handles.Components)
-comp = handles.(handles.Components{k});
-legendary = strings(1, comp.NumDS);
-figure
-hold on
-    for i=1:comp.NumDS+1
-        plot(comp.EDP, comp.P_Damage(i, :), 'LineWidth', 2)
-        if i == 1
-            legendary(i) = 'No Damage';
-        else
-            legendary(i) = strcat('DS', num2str(i-1));
-        end
-    end
-    title(strcat(num2str(handles.Components{k}), ' Probability of being in DS(i)'))
-    xlabel(strcat('EDP (', comp.EDPtype, ')'))
-    ylabel('P[Ds = ds | EDP]')
-    legend(legendary)
-    set(gca, ...
-  'Box'         , 'off'     , ...
-  'TickDir'     , 'out'     , ...
-  'TickLength'  , [.02 .02] , ...
-  'XMinorTick'  , 'on'      , ...
-  'YMinorTick'  , 'on');
-    grid on
-    
-  app.handles = handles;
-end
+% % Display P[DS = ds | EDP]
+% for k = 1:length(handles.Components)
+% comp = handles.(handles.Components{k});
+% legendary = strings(1, comp.NumDS);
+% figure
+% hold on
+%     for i=1:comp.NumDS+1
+%         plot(comp.EDP, comp.P_Damage(i, :), 'LineWidth', 2)
+%         if i == 1
+%             legendary(i) = 'No Damage';
+%         else
+%             legendary(i) = strcat('DS', num2str(i-1));
+%         end
+%     end
+%     title(strcat(num2str(handles.Components{k}), ' Probability of being in DS(i)'))
+%     xlabel(strcat('EDP (', comp.EDPtype, ')'))
+%     ylabel('P[Ds = ds | EDP]')
+%     legend(legendary)
+%     set(gca, ...
+%   'Box'         , 'off'     , ...
+%   'TickDir'     , 'out'     , ...
+%   'TickLength'  , [.02 .02] , ...
+%   'XMinorTick'  , 'on'      , ...
+%   'YMinorTick'  , 'on');
+%     grid on
+%     
+%   
+app.handles = handles;
+ end

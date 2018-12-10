@@ -1,5 +1,7 @@
 function [app] = expectedLoss_EDP(app)
+
 handles = app.handles;
+
 %Expected Loss Per Damage State
 for i = 1:length(handles.Components) %Loop over each component/loss function
     ExpectedLoss_DS = zeros(handles.(handles.Components{i}).NumDS+1,1);
@@ -21,6 +23,8 @@ for i = 1:length(handles.Components) %Loop over each component/loss function
     handles.(handles.Components{i}).ExpectedLoss_EDP = ExpectedLoss_EDP;
 end
 
+handles.numComponents = length(handles.Components);
+
 for j = 1:handles.numComponents
     EL_EDP_1comp = sum(handles.(handles.Components{j}).ExpectedLoss_EDP);
     handles.(handles.Components{j}).EL_EDP_Component = EL_EDP_1comp;
@@ -28,6 +32,7 @@ for j = 1:handles.numComponents
         handles.(handles.Components{j}).EL_EDP_Story(i, :) = EL_EDP_1comp * handles.(handles.storys{i}).NumComp(j);
     end
 end
+
 app.handles = handles;
 %Expected Loss Per IM
 %Perhaps organize structure similarly to loss/fragility function structure
