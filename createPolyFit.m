@@ -7,8 +7,6 @@ function [handles] = createPolyFit(order, curve, interval, dSa)
 % interval - lowest and highest number of Sa for fitting
 % dSa - spacing of Sa vector
 
-order = str2num(order);
-
 % Not sure how hazard curve is loaded in, assuming that each will be a row
 % in a loaded in vector, change if necessary
 LoadedSa = curve(:,1);
@@ -45,7 +43,7 @@ if order == 4
         .^2+4*p(1)*log(Sa_fitted).^3)./Sa_fitted.*exp(p(5)+p(4)*log(Sa_fitted)+p(3)...
         *log(Sa_fitted).^2+p(2)*log(Sa_fitted).^3+p(1)*log(Sa_fitted).^4));
     
-    str1=['Curve: ',num2str(p(5)),' + ',num2str(p(4)),'x + ',num2str(p(3)),...
+    handles.str1=['Curve: ',num2str(p(5)),' + ',num2str(p(4)),'x + ',num2str(p(3)),...
         'x^2 + ',num2str(p(2)), 'x^3 + ', num2str(p(1)),...
         newline 'R^2 = ', num2str(R_squared)];
     
@@ -66,7 +64,7 @@ elseif order == 3
         .^2)./Sa_fitted.*exp(p(4)+p(3)*log(Sa_fitted)+p(2)*...
         log(Sa_fitted).^2+p(1)*log(Sa_fitted).^3));
     
-    str1=['Curve: ',num2str(p(4)),' + ',num2str(p(3)),'x + ',num2str(p(2)),...
+    handles.str1=['Curve: ',num2str(p(4)),' + ',num2str(p(3)),'x + ',num2str(p(2)),...
         'x^2 + ',num2str(p(1)), 'x^3 ' newline 'R^2 = ', num2str(R_squared)];
 
 end
@@ -75,24 +73,24 @@ end
 handles.hazardDerivative = [Sa_fitted; derivpoly];
 handles.hazardCurve =  [Sa_fitted; regularpoly];
 
-figure
-loglog(LoadedSa, LoadedMAF, '-o', Sa_fitted, regularpoly)
-title('Seismic Hazard Curve')
-xlabel('Sa')
-ylabel('Mean Annual Frequency')
-legend('Hazard Curve','Polyfit')
-% xlim([Sa_fitted(1),Sa_fitted(end)])
-set(gca, ...
-  'Box'         , 'off'     , ...
-  'TickDir'     , 'out'     , ...
-  'TickLength'  , [.02 .02] , ...
-  'XMinorTick'  , 'on'      , ...
-  'YMinorTick'  , 'on');
-t=text(.015, min(regularpoly), str1);
-t.FontSize = 8;
-t.BackgroundColor = 'w';
-t.EdgeColor = 'k';
-grid on
+% figure
+% loglog(LoadedSa, LoadedMAF, '-o', Sa_fitted, regularpoly)
+% title('Seismic Hazard Curve')
+% xlabel('Sa')
+% ylabel('Mean Annual Frequency')
+% legend('Hazard Curve','Polyfit')
+% % xlim([Sa_fitted(1),Sa_fitted(end)])
+% set(gca, ...
+%   'Box'         , 'off'     , ...
+%   'TickDir'     , 'out'     , ...
+%   'TickLength'  , [.02 .02] , ...
+%   'XMinorTick'  , 'on'      , ...
+%   'YMinorTick'  , 'on');
+% t=text(.015, min(regularpoly), str1);
+% t.FontSize = 8;
+% t.BackgroundColor = 'w';
+% t.EdgeColor = 'k';
+% grid on
 end
 
 
