@@ -1,5 +1,5 @@
-function [handles] = ResponseEstimation(handles)
-
+function [app] = ResponseEstimation(app)
+handles = app.handles;
 %Initialize Variables
 numberCollapse = zeros (length(handles.stripes),1);
 medianEDP = zeros (length(handles.stripes),1);
@@ -104,4 +104,6 @@ for i=1:length(handles.EDPnames)
     else
         disp('error')
     end
+    
+    app.handles = handles;
 end

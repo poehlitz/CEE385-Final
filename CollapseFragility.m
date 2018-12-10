@@ -1,5 +1,5 @@
-function [handles] = CollapseFragility(n,handles)
-
+function [app] = CollapseFragility(n,app)
+handles = app.handles;
 %Hello
 
 %Fit of Collapse Fragility Function based on Maximum Likelihood
@@ -50,3 +50,5 @@ Prob_50 = 1 - exp(-MAF_c*50);
 
 handles.MAF_c = MAF_c;
 handles.Prob_50 = Prob_50;
+app.handles = handles;
+end

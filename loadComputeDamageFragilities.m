@@ -1,4 +1,5 @@
-function [handles] = loadComputeDamageFragilities(handles, filename)
+function [app] = loadComputeDamageFragilities(app, filename)
+handles = app.handles;
 %Load in Fragility Function Information
 %Note this only works for fragility and loss function that all have the
 %same number of damage states, maybe we could improve?
@@ -115,4 +116,6 @@ hold on
   'XMinorTick'  , 'on'      , ...
   'YMinorTick'  , 'on');
     grid on
+    
+  app.handles = handles;
 end

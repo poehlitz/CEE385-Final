@@ -1,5 +1,6 @@
-function handles = expectedLoss_IM(handles)
+function app = expectedLoss_IM(app)
 
+handles = app.handles;
 % Dat for loop though, loop through all componenets, stories, and Sa values
 for j = 1:handles.numComponents
     for i = 1:handles.numStory
@@ -32,4 +33,5 @@ end
 % #IM by #Story matrix of losses at each IM for a given story. All stories
 % will be summed together later
 handles.Loss_IM_Story = Loss_IM_Story;
+app.handles = handles;
 end

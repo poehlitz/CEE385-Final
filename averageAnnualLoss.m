@@ -1,4 +1,5 @@
-function handles = averageAnnualLoss(handles)
+function app = averageAnnualLoss(app)
+handles = app.handles;
 
 % Combine all individual losses (already weighted based on P_collapse,
 % demo, repair) into loss given IM
@@ -28,4 +29,6 @@ handles.ratio.Collapse = lossRatioCollapse;
 % Display the total AAL
 disp('Average Annual Loss:')
 disp(handles.AAL)
+
+app.handles = handles;
 end

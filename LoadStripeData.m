@@ -1,4 +1,6 @@
-function [handles] = LoadStripeData(handles, filenames,ns)
+function [app] = LoadStripeData(app, filenames,ns)
+
+handles = app.handles;
 
 for i=1:ns
     disp(filenames(i))
@@ -17,4 +19,6 @@ for i=1:length(EDP)
     a(j,:) = table2array(stripes_edp{j}(i,2:end));
     end
     handles.EDPtype.(EDP{i}).GMData = a;
+    
+app.handles = handles;
 end

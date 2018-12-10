@@ -1,4 +1,6 @@
-function handles = repairCollapseDemoProb(handles)
+function app = repairCollapseDemoProb(app)
+
+handles = app.handles;
 
 % Add all of the losses for the different story together
 handles.Loss_IM = sum(handles.Loss_IM_Story);
@@ -36,3 +38,5 @@ set(gca, ...
   'YMinorTick'  , 'on');
 grid on
 hold off
+app.handles = handles;
+end

@@ -1,4 +1,4 @@
-function [handles] = createPolyFit(order, curve, interval, dSa)
+function [app] = createPolyFit(app)
 % Order must be defined in GUI, either 3 or 4, remember str2num
 % Remember that curve must bew defined by user via file
 %
@@ -9,21 +9,25 @@ function [handles] = createPolyFit(order, curve, interval, dSa)
 
 % Not sure how hazard curve is loaded in, assuming that each will be a row
 % in a loaded in vector, change if necessary
+order = app.handles.PolynomialOrder;
+curve = app.handles.hazard;
+interval = app.handles.SaIntegration;
+fit = app.handles.interval;
 LoadedSa = curve(:,1);
 LoadedMAF = curve(:,2);
 npoints = length(LoadedSa);
 
 % Arbitrary Fitting Bounds
-Sa_lowerbound = .01; 
-Sa_upperbound = 2.5;
+Sa_lowerbound = fit(1); 
+Sa_upperbound = fit(2);
 
 % Use loaded and MAF to interpolate
-Sa_logspace = logspace(log10(Sa_lowerbound), log10(Sa_upperbound), 1000);
+Sa_logspace = logspace(log10(Sa_lowerbound), log10(Sa_upperbound), 200);
 MAF_logspace = exp(interp1(log(LoadedSa), log(LoadedMAF), log(Sa_logspace)));
 
 % Sa for fitted curve, can be different interval than the logspace. Use
 % to find MAF values for range that we want to integrate over
-Sa_fitted = interval(1):dSa:interval(2);
+Sa_fitted = interval(1):.01:interval(2);
 
 if order == 4
     [p, ~] = polyfit(log(Sa_logspace), log(MAF_logspace), 4);
@@ -43,8 +47,8 @@ if order == 4
         .^2+4*p(1)*log(Sa_fitted).^3)./Sa_fitted.*exp(p(5)+p(4)*log(Sa_fitted)+p(3)...
         *log(Sa_fitted).^2+p(2)*log(Sa_fitted).^3+p(1)*log(Sa_fitted).^4));
     
-    handles.str1=['Curve: ',num2str(p(5)),' + ',num2str(p(4)),'x + ',num2str(p(3)),...
-        'x^2 + ',num2str(p(2)), 'x^3 + ', num2str(p(1)),...
+    app.handles.str1=['Curve: ',num2str(p(5)),' + ',num2str(p(4)),'x + ',num2str(p(3)),...
+        'x^2 + ',num2str(p(2)), 'x^3 + ', num2str(p(1)), 'X^4  |  '...
         newline 'R^2 = ', num2str(R_squared)];
     
 elseif order == 3
@@ -64,14 +68,15 @@ elseif order == 3
         .^2)./Sa_fitted.*exp(p(4)+p(3)*log(Sa_fitted)+p(2)*...
         log(Sa_fitted).^2+p(1)*log(Sa_fitted).^3));
     
-    handles.str1=['Curve: ',num2str(p(4)),' + ',num2str(p(3)),'x + ',num2str(p(2)),...
+    app.handles.str1=['Curve: ',num2str(p(4)),' + ',num2str(p(3)),'x + ',num2str(p(2)),...
         'x^2 + ',num2str(p(1)), 'x^3 ' newline 'R^2 = ', num2str(R_squared)];
 
 end
     
 
-handles.hazardDerivative = [Sa_fitted; derivpoly];
-handles.hazardCurve =  [Sa_fitted; regularpoly];
+app.handles.hazardDerivative = [Sa_fitted; derivpoly];
+app.handles.hazardCurve =  [Sa_fitted; regularpoly];
+
 
 % figure
 % loglog(LoadedSa, LoadedMAF, '-o', Sa_fitted, regularpoly)
