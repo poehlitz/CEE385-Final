@@ -7,6 +7,11 @@ handles = app.handles;
 handles.L_IM = handles.ncLoss_IM + handles.collapseLoss_IM + handles.demoLoss_IM;
 deriv = handles.hazardDerivative(2,:);
 
+handles.deagplot = deriv.*handles.L_IM;
+handles.deagplotC = deriv.*handles.collapseLoss_IM;
+handles.deagplotR = deriv.*handles.ncLoss_IM;
+handles.deagplotD = deriv.*handles.demoLoss_IM;
+
 % Calculate total AAL, and AAL caused by each of the components
 handles.AAL = trapz(handles.hazardCurve(1,:), deriv.*handles.L_IM);
 AAL_deag_repair = trapz(handles.hazardCurve(1,:), deriv.*handles.ncLoss_IM);

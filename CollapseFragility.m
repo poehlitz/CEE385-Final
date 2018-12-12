@@ -47,6 +47,7 @@ pdf_collapse = ML_P.*handles.hazardDerivative(2,:);
 % grid on
 
 %Integrate PDF of Collapse to get Mean Annual Frequency
+handles.CollapseDeaggregation = pdf_collapse;
 MAF_c = trapz(handles.hazardDerivative(1,:), pdf_collapse);% Is this corrent?
 %Probability of Collapse in 50 years
 Prob_50 = 1 - exp(-MAF_c*50);
