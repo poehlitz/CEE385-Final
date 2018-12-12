@@ -6,6 +6,8 @@ handles = app.handles;
 fun2 = @(v) maxLikelihood(handles.numberCollapse, n, handles.stripes, v(1), v(2));
 v_guess = [.8, .4];
 ML_minimumParameters = fminsearch(fun2, v_guess);
+handles.CollapseMedian = ML_minimumParameters(1); 
+handles.CollapseStd = ML_minimumParameters(2);
 
 ML_Sa = handles.hazardDerivative(1,:);
 ML_P = normcdf((log(ML_Sa)-log(ML_minimumParameters(1)))/ML_minimumParameters(2));
