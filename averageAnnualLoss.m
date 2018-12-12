@@ -13,6 +13,10 @@ AAL_deag_repair = trapz(handles.hazardCurve(1,:), deriv.*handles.ncLoss_IM);
 AAL_deag_collapse = trapz(handles.hazardCurve(1,:), deriv.*handles.collapseLoss_IM);
 AAL_deag_demo = trapz(handles.hazardCurve(1,:), deriv.*handles.demoLoss_IM);
 
+handles.AAL_collapse = AAL_deag_collapse;
+handles.AAL_demo = AAL_deag_demo;
+handles.AAL_repair = AAL_deag_repair;
+
 % Find the ratio
 lossRatioRepair = AAL_deag_repair/handles.AAL;
 lossRatioCollapse = AAL_deag_collapse/handles.AAL;
