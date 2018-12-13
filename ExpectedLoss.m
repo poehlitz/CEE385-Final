@@ -2,10 +2,6 @@ function [app] = ExpectedLoss(app)
 
 handles = app.handles;
 
-%Enter in GUI
-handles.demo.RIDR_median = 0.015; % User input here
-handles.demo.RIDR_dispersion = 0.3; % User input here
-
 %Probability of Demolition At Each EDP
 %Loop over each EDP
     prob_demo_edp = normcdf((log(handles.EDP.RIDR)...
