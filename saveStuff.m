@@ -3,17 +3,23 @@ function saveStuff(app)
 [file,path] = uiputfile('*.mat');
 filename = fullfile(path, file);
 
-allData = app.handles;
+miscData = app.handles;
 handles = app.handles;
 
-AAL = handles.AAL;
-hazardCurve = app.UIAxes2;
-collapseCurve = app.UIAxes;
-eventProbability = app.UIAxes6;
-lossEstimation = app.UIAxes4;
+results.AAL = handles.AAL;
+results.hazardDerivative = handles.hazardDerivative;
+results.hazardCurve = handles.hazardCurve;
+results.deaggregationLossRatios = handles.ratio;
+plots.hazardCurve = app.UIAxes2;
+plots.collapseCurve = app.UIAxes;
+plots.eventProbability = app.UIAxes6;
+plots.lossEstimation = app.UIAxes4;
 
-save(filename, 'hazardCurve', 'collapseCurve', 'eventProbability',...
-    'lossEstimation', '', 'allData')
+results.medCollapse = handles.CollapseMedian;
+results.stdCollapse = handles.CollapseStd;
+results.MAF_Collapse = handles.MAF_c;
+
+save(filename, 'plots', 'results', 'miscData')
 end
 
 
