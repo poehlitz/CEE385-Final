@@ -90,8 +90,8 @@ for i=1:length(handles.EDPnames)
 %         plot(handles.EDP.RIDR,handles.EDPtype.(handles.EDPnames{i}).pdf_edp_im(:,50))
 %         title(['Probabilty Distribution of ',(handles.EDPnames{i}),' Given Sa = ',num2str(handles.hazardDerivative(1,50)),'g'])
 %         xlabel(handles.EDPnames{i})
-    figure
-    plot(handles.EDP.RIDR,handles.EDPtype.(handles.EDPnames{i}).maf_edp)
+%     figure
+%     plot(handles.EDP.RIDR,handles.EDPtype.(handles.EDPnames{i}).maf_edp)
     elseif contains(handles.EDPnames{i},'IDR')
         for j=1:length(median_everyIM)
             handles.EDPtype.(handles.EDPnames{i}).pdf_edp_im(:,j) = (1./(handles.EDP.IDR.*sig_everyIM(j)*sqrt(2*pi))).*exp(-((log(handles.EDP.IDR)-log(median_everyIM(j))).^2)./(2*(sig_everyIM(j).^2)));
@@ -102,16 +102,16 @@ for i=1:length(handles.EDPnames)
 %         plot(handles.EDP.IDR,handles.EDPtype.(handles.EDPnames{i}).pdf_edp_im(:,50))
 %         title(['Probabilty Distribution of ',(handles.EDPnames{i}),' Given Sa = ',num2str(handles.hazardDerivative(1,50)),'g'])
 %         xlabel(handles.EDPnames{i})
-    figure
-    plot(handles.EDP.IDR,handles.EDPtype.(handles.EDPnames{i}).maf_edp)
+%     figure
+%     plot(handles.EDP.IDR,handles.EDPtype.(handles.EDPnames{i}).maf_edp)
     elseif contains(handles.EDPnames{i},'PFA')
         for j=1:length(median_everyIM)
             handles.EDPtype.(handles.EDPnames{i}).pdf_edp_im(:,j) = (1./(handles.EDP.PFA.*sig_everyIM(j)*sqrt(2*pi))).*exp(-((log(handles.EDP.PFA)-log(median_everyIM(j))).^2)./(2*(sig_everyIM(j).^2)));
         end
         cdf = normcdf((log(handles.EDP.PFA) - log(median_everyIM(j)))/sig_everyIM(j));
         handles.EDPtype.(handles.EDPnames{i}).maf_edp = trapz(handles.hazardDerivative(1,:),handles.hazardDerivative(2,:)'.*(1-cdf));
-    figure
-    plot(handles.EDP.PFA,handles.EDPtype.(handles.EDPnames{i}).maf_edp)
+%     figure
+%     plot(handles.EDP.PFA,handles.EDPtype.(handles.EDPnames{i}).maf_edp)
         %         figure
 %         plot(handles.EDP.PFA,handles.EDPtype.(handles.EDPnames{i}).pdf_edp_im(:,50))
 %         title(['Probabilty Distribution of ',(handles.EDPnames{i}),' Given Sa = ',num2str(handles.hazardDerivative(1,50)),'g'])
